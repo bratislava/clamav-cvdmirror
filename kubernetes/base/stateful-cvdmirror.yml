@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cvdmirror
+  namespace: ${NAMESPACE}
+  labels:
+    service: cvdmirror
+  annotations:
+    repositoryUrl: ${BUILD_REPOSITORY_URI}
+    commit: ${COMMIT}
+    tag: ${TAG}
+    image: ${IMAGE}
+spec:
+  serviceName: cvdmirror
+  selector:
+    matchLabels:
+      service: cvdmirror
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: cvdmirror
+    spec:
+      containers:
+        - image: ${IMAGE_TAG}
+          name: app
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: 8Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - name: cvdmirror
+              mountPath: /mnt/cvdupdate/
+          envFrom:
+            - configMapRef:
+                name: env
+          livenessProbe:
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            exec:
+              command:
+                - /health.sh
+      imagePullSecrets:
+        - name: ${IMAGE_PULL_SECRET}
+
+  # Volume Claim
+  volumeClaimTemplates:
+    - metadata:
+        name: cvdmirror
+        labels:
+          service: cvdmirror
+      spec:
+        accessModes: ['ReadWriteOnce']
+        resources:
+          requests:
+            storage: 10Gi

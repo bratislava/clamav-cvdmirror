@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: cvdmirror
+  name: app
   namespace: ${NAMESPACE}
   labels:
-    service: cvdmirror
+    service: app
   annotations:
     repositoryUrl: ${BUILD_REPOSITORY_URI}
     commit: ${COMMIT}
     tag: ${TAG}
     image: ${IMAGE}
 spec:
-  serviceName: cvdmirror
+  serviceName: app
   selector:
     matchLabels:
-      service: cvdmirror
+      service: app
   replicas: 1
   template:
     metadata:
       labels:
-        service: cvdmirror
+        service: app
     spec:
       containers:
         - image: ${IMAGE_TAG}
@@ -51,7 +51,7 @@ spec:
     - metadata:
         name: cvdmirror
         labels:
-          service: cvdmirror
+          service: app
       spec:
         accessModes: ['ReadWriteOnce']
         resources:

@@ -8,6 +8,9 @@ RUN apk add --no-cache bash caddy \
 # Install CVD-Update
 RUN pip install --no-cache-dir cvdupdate
 
+# Copy config
+COPY Caddyfile /Caddyfile
+
 # Copy Scripts
 COPY health.sh /health.sh
 COPY readiness.sh /readiness.sh

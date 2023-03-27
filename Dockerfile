@@ -1,4 +1,4 @@
-FROM docker.io/python:3.9-alpine
+FROM docker.io/python:3.9-alpine AS prod
 ENV PYTHONUNBUFFERED 1
 
 # Install Bash and Caddy

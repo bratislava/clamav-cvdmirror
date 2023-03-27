@@ -33,7 +33,7 @@ spec:
               memory: 1Gi
           volumeMounts:
             - name: data
-              mountPath: /mnt/cvdupdate/
+              mountPath: /mnt/cvdupdate
           envFrom:
             - configMapRef:
                 name: env

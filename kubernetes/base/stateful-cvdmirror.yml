@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: app
+  name: database
   namespace: ${NAMESPACE}
   labels:
-    service: app
+    service: database
   annotations:
     repositoryUrl: ${BUILD_REPOSITORY_URI}
     commit: ${COMMIT}
     tag: ${TAG}
     image: ${IMAGE}
 spec:
-  serviceName: app
+  serviceName: database
   selector:
     matchLabels:
-      service: app
+      service: database
   replicas: 1
   template:
     metadata:
       labels:
-        service: app
+        service: database
     spec:
       containers:
         - image: ${IMAGE_TAG}
@@ -52,7 +52,7 @@ spec:
     - metadata:
         name: database
         labels:
-          service: app
+          service: database
       spec:
         accessModes: ['ReadWriteOnce']
         resources:

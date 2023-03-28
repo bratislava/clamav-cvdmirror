@@ -27,13 +27,14 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
+              cpu: 500m
               memory: 8Gi
             requests:
-              cpu: 500m
+              cpu: 100m
               memory: 1Gi
           volumeMounts:
-            - name: data
-              mountPath: /mnt/cvdupdate
+            - name: database
+              mountPath: /mnt/cvdupdate/database
           envFrom:
             - configMapRef:
                 name: env
@@ -49,7 +50,7 @@ spec:
   # Volume Claim
   volumeClaimTemplates:
     - metadata:
-        name: data
+        name: database
         labels:
           service: app
       spec:

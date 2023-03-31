@@ -11,7 +11,7 @@ metadata:
     tag: ${TAG}
     image: ${IMAGE}
 spec:
-  schedule: "*/15 * * * *"
+  schedule: "60 * 4 * *"
   jobTemplate:
     spec:
       template:

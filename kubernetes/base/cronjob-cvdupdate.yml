@@ -1,10 +1,10 @@
-apiVersion: apps/v1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: cvdupdate
+  name: cron
   namespace: ${NAMESPACE}
   labels:
-    service: cvdupdate
+    service: cron
   annotations:
     repositoryUrl: ${BUILD_REPOSITORY_URI}
     commit: ${COMMIT}
@@ -18,7 +18,7 @@ spec:
         spec:
           containers:
             - image: ${IMAGE_TAG}
-              name: app
+              name: cron
               imagePullPolicy: IfNotPresent
               command: ["./entrypoint.sh"]
               args: ["update"]

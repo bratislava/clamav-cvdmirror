@@ -36,7 +36,8 @@ spec:
               memory: 1Gi
           volumeMounts:
             - name: database
-              mountPath: /mnt/cvdupdate/database
+              mountPath: /mnt/cvdupdate
+              subPath: database
           envFrom:
             - configMapRef:
                 name: env

@@ -24,4 +24,3 @@ RUN chmod +x ./entrypoint.sh
 
 # Start Server
 EXPOSE 8080
-CMD [ "./entrypoint.sh", "serve" ]

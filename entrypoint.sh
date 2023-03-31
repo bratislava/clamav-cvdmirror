@@ -5,18 +5,22 @@ CVD_DIR="${CVD_DIR:=/mnt/cvdupdate}"
 
 # Configuration Functions
 check_config() {
-
-    ls -l
-
     if [ ! -e $CVD_DIR/config.json ]; then
         echo "Missing CVD configuration. Creating..."
         cvd config set --config $CVD_DIR/config.json --dbdir $CVD_DIR/database --logdir $CVD_DIR/logs
         echo "CVD configuration created..."
+    else
+        echo "CVD configuration found..."
     fi
+
     if [ ! -e $CVD_DIR/database ]; then
       echo "Creating $CVD_DIR/database folder"
       mkdir -p $CVD_DIR/database
+    else
+      echo "$CVD_DIR/database folder found"
     fi
+
+
 }
 
 show_config() {
@@ -33,6 +37,8 @@ check_database() {
         check_config
         show_config
         update_database
+    else
+        echo "CVD database found..."
     fi
 }
 

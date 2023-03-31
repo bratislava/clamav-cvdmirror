@@ -41,7 +41,7 @@ spec:
           volumes:
             - name: database
               persistentVolumeClaim:
-                claimName: database-clamav-cvdmirror-database
+                claimName: database-clamav-cvdmirror-database-0
           imagePullSecrets:
             - name: ${IMAGE_PULL_SECRET}
           restartPolicy: OnFailure

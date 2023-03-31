@@ -1,6 +1,7 @@
 resources:
   - statefulset-cvdmirror.yml
   - service-cvdmirror.yml
+  - cronjob-cvdupdate.yml
 configurations:
   - configuration.yml
 

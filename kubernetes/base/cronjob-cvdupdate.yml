@@ -44,4 +44,3 @@ spec:
                 claimName: database-clamav-cvdmirror-database-0
           imagePullSecrets:
             - name: ${IMAGE_PULL_SECRET}
-          restartPolicy: OnFailure

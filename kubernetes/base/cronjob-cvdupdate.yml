@@ -27,7 +27,7 @@ spec:
                   cpu: 100m
                   memory: 1Gi
               volumeMounts:
-                - name: database-clamav-cvdmirror-database
+                - name: database
                   mountPath: /mnt/cvdupdate/database
               envFrom:
                 - configMapRef:
@@ -38,6 +38,10 @@ spec:
                 exec:
                   command:
                     - /health.sh
+              volumes:
+                - name: database
+                  persistentVolumeClaim:
+                    claimName: database
           imagePullSecrets:
             - name: ${IMAGE_PULL_SECRET}
           restartPolicy: OnFailure

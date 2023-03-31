@@ -38,10 +38,10 @@ spec:
                 exec:
                   command:
                     - /health.sh
-              volumes:
-                - name: database
-                  persistentVolumeClaim:
-                    claimName: database
+          volumes:
+            - name: database
+              persistentVolumeClaim:
+                claimName: database
           imagePullSecrets:
             - name: ${IMAGE_PULL_SECRET}
           restartPolicy: OnFailure

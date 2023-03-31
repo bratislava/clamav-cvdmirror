@@ -5,6 +5,9 @@ CVD_DIR="${CVD_DIR:=/mnt/cvdupdate}"
 
 # Configuration Functions
 check_config() {
+
+    ls -l
+
     if [ ! -e $CVD_DIR/config.json ]; then
         echo "Missing CVD configuration. Creating..."
         cvd config set --config $CVD_DIR/config.json --dbdir $CVD_DIR/databases --logdir $CVD_DIR/logs

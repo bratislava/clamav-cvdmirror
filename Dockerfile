@@ -1,6 +1,6 @@
 FROM docker.io/python:3.9-alpine AS prod
 ENV PYTHONUNBUFFERED 1
-WORKDIR /opt/app-root/src
+WORKDIR /
 
 # Install Bash and Caddy
 RUN apk add --no-cache bash caddy \

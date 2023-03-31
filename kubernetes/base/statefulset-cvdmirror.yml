@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - image: ${IMAGE_TAG}
-          name: app
+          name: cvdmirror
           imagePullPolicy: IfNotPresent
           command: ["./entrypoint.sh"]
           args: ["serve"]

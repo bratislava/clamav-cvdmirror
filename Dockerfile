@@ -14,12 +14,10 @@ COPY Caddyfile Caddyfile
 
 # Copy Scripts
 COPY health.sh health.sh
-COPY readiness.sh readiness.sh
 COPY entrypoint.sh entrypoint.sh
 
 # Set permissions
 RUN chmod +x ./health.sh
-RUN chmod +x ./readiness.sh
 RUN chmod +x ./entrypoint.sh
 
 # Start Server

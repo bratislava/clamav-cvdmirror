@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: CronJob
+metadata:
+  name: cvdupdate
+  namespace: ${NAMESPACE}
+  labels:
+    service: cvdupdate
+  annotations:
+    repositoryUrl: ${BUILD_REPOSITORY_URI}
+    commit: ${COMMIT}
+    tag: ${TAG}
+    image: ${IMAGE}
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: ${IMAGE_TAG}
+              name: app
+              imagePullPolicy: IfNotPresent
+              command: ["./entrypoint.sh"]
+              args: ["update"]
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 1Gi
+              volumeMounts:
+                - name: database
+                  mountPath: /mnt/cvdupdate/database
+              envFrom:
+                - configMapRef:
+                    name: env
+              livenessProbe:
+                initialDelaySeconds: 60
+                periodSeconds: 60
+                exec:
+                  command:
+                    - /health.sh
+          imagePullSecrets:
+            - name: ${IMAGE_PULL_SECRET}
+          restartPolicy: OnFailure

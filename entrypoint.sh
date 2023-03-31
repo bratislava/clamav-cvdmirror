@@ -10,25 +10,25 @@ check_config() {
 
     if [ ! -e $CVD_DIR/config.json ]; then
         echo "Missing CVD configuration. Creating..."
-        cvd config set --config $CVD_DIR/config.json --dbdir $CVD_DIR/databases --logdir $CVD_DIR/logs
+        cvd config set --config $CVD_DIR/config.json --dbdir $CVD_DIR/database --logdir $CVD_DIR/logs
         echo "CVD configuration created..."
     fi
-    if [ ! -e $CVD_DIR/databases ]; then
-      echo "Creating $CVD_DIR/databases folder"
-      mkdir -p $CVD_DIR/databases
+    if [ ! -e $CVD_DIR/database ]; then
+      echo "Creating $CVD_DIR/database folder"
+      mkdir -p $CVD_DIR/database
     fi
 }
 
 show_config() {
     echo "CVD-Update configuration..."
     cvd config show --config $CVD_DIR/config.json
-    echo "Current contents in $CVD_DIR/databases directory..."
-    ls -al $CVD_DIR/databases
+    echo "Current contents in $CVD_DIR/database directory..."
+    ls -al $CVD_DIR/database
 }
 
 # CVD Database Functions
 check_database() {
-    if [ ! -e $CVD_DIR/databases ]; then
+    if [ ! -e $CVD_DIR/database ]; then
         echo "Missing CVD database directory. Attempting to update..."
         check_config
         show_config
@@ -37,14 +37,14 @@ check_database() {
 }
 
 serve_database() {
-    if [ -e $CVD_DIR/databases ]; then
+    if [ -e $CVD_DIR/database ]; then
         echo "Hosting ClamAV Database..."
         if [ -e /mnt/Caddyfile ]; then
             echo "Using mounted Caddyfile config..."
             exec caddy run --config /mnt/Caddyfile --adapter caddyfile
         else
             echo "Using default Caddyfile config..."
-            # exec caddy file-server --listen :8080 --browse --root $CVD_DIR/databases
+            # exec caddy file-server --listen :8080 --browse --root $CVD_DIR/database
             exec caddy run --config ./Caddyfile --adapter caddyfile
         fi
     else

@@ -1,5 +1,5 @@
 resources:
-  - stateful-cvdmirror.yml
+  - statefulset-cvdmirror.yml
   - service-cvdmirror.yml
 configurations:
   - configuration.yml

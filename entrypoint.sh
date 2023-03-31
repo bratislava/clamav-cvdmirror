@@ -49,7 +49,7 @@ serve_database() {
             echo "Using mounted Caddyfile config..."
             exec caddy run --config /mnt/Caddyfile --adapter caddyfile
         else
-            echo "Using default Caddyfile config..."
+            echo "Using provided Caddyfile config..."
             # exec caddy file-server --listen :8080 --browse --root $CVD_DIR/database
             exec caddy run --config ./Caddyfile --adapter caddyfile
         fi

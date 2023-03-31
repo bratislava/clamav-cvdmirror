@@ -27,7 +27,7 @@ spec:
                   cpu: 100m
                   memory: 1Gi
               volumeMounts:
-                - name: clamav-cvdmirror-database
+                - name: database-clamav-cvdmirror-database
                   mountPath: /mnt/cvdupdate/database
               envFrom:
                 - configMapRef:

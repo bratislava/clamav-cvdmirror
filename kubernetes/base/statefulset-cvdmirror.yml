@@ -47,6 +47,28 @@ spec:
             exec:
               command:
                 - /health.sh
+        - image: ${IMAGE_TAG}
+          name: cron
+          imagePullPolicy: IfNotPresent
+          command: [ "crontab" ]
+          args: [ 'crontab -l | { cat; echo "* * * * * bash /root/get_date.sh"; } | crontab -' ]
+          resources:
+            limits:
+              cpu: 100m
+              memory: 1Gi
+          volumeMounts:
+            - name: database
+              mountPath: /mnt/cvdupdate/
+              subPath: database
+          envFrom:
+            - configMapRef:
+                name: env
+          livenessProbe:
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            exec:
+              command:
+                - /health.sh
       imagePullSecrets:
         - name: ${IMAGE_PULL_SECRET}
 

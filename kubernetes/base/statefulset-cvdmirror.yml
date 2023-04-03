@@ -51,7 +51,7 @@ spec:
           name: cron
           imagePullPolicy: IfNotPresent
           command: [ "crontab" ]
-          args: [ 'crontab -l | { cat; echo "* * * * * bash /root/get_date.sh"; } | crontab -' ]
+          args: [ 'crontab -l | { cat; echo "5 * * * * bash /entrypoint.sh update"; } | crontab -' ]
           resources:
             limits:
               cpu: 100m

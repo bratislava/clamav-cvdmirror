@@ -20,5 +20,11 @@ COPY entrypoint.sh entrypoint.sh
 RUN chmod +x ./health.sh
 RUN chmod +x ./entrypoint.sh
 
+# copy cron
+COPY cron /etc/cron.d/cron
+
+# Set permissions
+RUN chmod 0644 /etc/cron.d/cron
+
 # Start Server
 EXPOSE 8080

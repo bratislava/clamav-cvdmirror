@@ -50,8 +50,8 @@ spec:
         - image: ${IMAGE_TAG}
           name: cron
           imagePullPolicy: IfNotPresent
-          command: [ "crontab" ]
-          args: [ '-l | { cat; echo "5 * * * * bash /entrypoint.sh update"; } | crontab -' ]
+          command: [ "/usr/sbin/crond" ]
+          args: [ "-f" ]
           resources:
             limits:
               cpu: 100m

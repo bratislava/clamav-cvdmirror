@@ -21,10 +21,12 @@ RUN chmod +x ./health.sh
 RUN chmod +x ./entrypoint.sh
 
 # copy cron
-COPY cron /etc/cron.d/cron
+#COPY cron /etc/cron.d/cron
 
 # Set permissions
-RUN chmod 0644 /etc/cron.d/cron
+#RUN chmod 0644 /etc/cron.d/cron
+
+RUN echo ' 5  *  *  *  * /opt/app-root/src/entrypoint.sh' >> /etc/crontabs/root
 
 # Start Server
 EXPOSE 8080

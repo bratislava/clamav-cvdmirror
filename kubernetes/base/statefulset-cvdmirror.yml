@@ -44,9 +44,9 @@ spec:
           livenessProbe:
             initialDelaySeconds: 60
             periodSeconds: 60
-            exec:
-              command:
-                - /opt/app-root/src/health.sh
+            httpGet:
+              path: /
+              port: 8080
         - image: ${IMAGE_TAG}
           name: cron
           imagePullPolicy: IfNotPresent

@@ -51,7 +51,7 @@ serve_database() {
         else
             echo "Using provided Caddyfile config..."
             # exec caddy file-server --listen :8080 --browse --root $CVD_DIR/database
-            exec caddy run --config ./Caddyfile --adapter caddyfile
+            exec caddy run --config ./Caddyfile --adapter caddyfile --resume
         fi
     else
         echo "CVD database is missing..."

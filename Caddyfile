@@ -3,6 +3,7 @@
   auto_https off
   http_port 8080
   https_port 8433
+  debug
 }
 
 :8080 {

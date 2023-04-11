@@ -20,8 +20,8 @@ COPY entrypoint.sh entrypoint.sh
 RUN chmod +x ./health.sh
 RUN chmod +x ./entrypoint.sh
 
-# cron every 8 hours
-RUN echo ' 0 */8 * * * /opt/app-root/src/entrypoint.sh update' >> /etc/crontabs/root
+# cron every 4 hours
+RUN echo ' 0 */4 * * * /opt/app-root/src/entrypoint.sh update' >> /etc/crontabs/root
 
 # Start Server
 EXPOSE 8080
